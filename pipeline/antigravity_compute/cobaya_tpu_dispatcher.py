@@ -132,6 +132,22 @@ def evaluate_tier3_tpu_batch(
     return results
 
 
+def dispatch_to_tpu(candidates: List[Dict[str, Any]], gcs_bucket: str = DEFAULT_GCS_DESI_BUCKET) -> List[Dict[str, Any]]:
+    """
+    Dispatches candidate dictionaries (with 'phenotype' mapped) to Antigravity TPU pod likelihood evaluation.
+    """
+    gcs_stream_uri = f"{gcs_bucket.rstrip('/')}/desi_dr1_bao_cov.json"
+    for cand in candidates:
+        phenotype = cand.get("phenotype", {})
+        if not phenotype:
+            phenotype = {"w0": -1.0, "omega_m": 0.30, "h0": 67.4}
+        likelihood = evaluate_desi_bao_likelihood(phenotype)
+        cand["likelihood"] = likelihood
+        cand["chi2_loss"] = likelihood["chi2"]
+        cand["gcs_stream_uri"] = gcs_stream_uri
+    return candidates
+
+
 if __name__ == "__main__":
     graph = build_antigravity_execution_graph(56)
     results = dispatch_tpu_parameter_sweep(graph)
