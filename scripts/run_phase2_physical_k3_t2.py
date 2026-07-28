@@ -10,6 +10,7 @@ import math
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'pipeline', 'antigravity_compute')))
 
+from utils.mlops_logger import EvolutionCheckpoint
 from integration.lean_client import LeanOracleClient
 from alpha_evolve.phenotype_mapper import map_k3_to_cosmology
 
@@ -119,6 +120,7 @@ def execute_phase2():
     POP_SIZE = 60     
     best_overall = None
     
+    ckpt = EvolutionCheckpoint()
     start_time = time.time()
     
     for gen in range(1, GENERATIONS + 1):
@@ -162,6 +164,9 @@ def execute_phase2():
         # Re-inject global best to prevent regression
         if best_overall["candidate_id"] not in [p["candidate_id"] for p in population]:
             population[0] = best_overall.copy()
+
+        # MLOps Checkpoint
+        ckpt.save_generation(gen, population, best_overall)
 
     lean_oracle.close()
     
