@@ -115,9 +115,8 @@ def execute_phase2():
 
     lean_oracle = LeanOracleClient(binary_path)
     
-    # Reduced for initial physical run due to heavy MCMC TPU latency
-    GENERATIONS = 5  
-    POP_SIZE = 20     
+    GENERATIONS = 25  
+    POP_SIZE = 60     
     best_overall = None
     
     start_time = time.time()
