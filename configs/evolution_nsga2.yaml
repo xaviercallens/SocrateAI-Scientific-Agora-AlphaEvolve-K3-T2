@@ -1,0 +1,39 @@
+# NSGA-II Multi-Objective Evolution Configuration
+# Used by: scripts/run_alpha_evolve.py, src/alpha_evolve/optimizers.py
+
+evolution:
+  algorithm: "NSGA-II"
+  population_size: 200
+  max_generations: 500
+  random_seed: 42
+  picard_fuchs_order: 4
+
+  genetic_operators:
+    crossover:
+      type: "sbx"
+      eta_c: 20.0
+      probability: 0.9
+    mutation:
+      type: "polynomial"
+      eta_m: 20.0
+      probability: 0.1
+    kodaira_mutation:
+      probability: 0.05
+      valid_types: ["I_1", "I_2", "II", "III", "IV", "IV*", "III*", "II*"]
+
+  surrogate:
+    hidden_layers: [128, 64, 32]
+    training_epochs: 100
+    learning_rate: 0.001
+    synthetic_samples: 5000
+    retrain_every_n_generations: 50
+
+  cma_es:
+    sigma_initial: 0.3
+    max_iterations: 100
+    elite_fraction: 0.01  # Apply CMA-ES refinement to top 1%
+
+  logging:
+    backend: "none"           # "wandb" | "mlflow" | "none"
+    project_name: "socrateai-k3t2-evolution"
+    log_every_n_generations: 10

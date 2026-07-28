@@ -1,0 +1,28 @@
+{
+  "seeds": [
+    {
+      "name": "Cooper_s7",
+      "picard_fuchs_coefficients": [1.0, -2.3, 0.8, 0.15],
+      "hodge_numbers": {"h11": 3, "h21": 19, "h22": 156},
+      "kodaira_fiber_type": "I_1",
+      "complex_structure_tau": [0.0, 1.2],
+      "kahler_modulus_rho": [1.5, 1.0]
+    },
+    {
+      "name": "Cooper_s10",
+      "picard_fuchs_coefficients": [0.5, -1.8, 1.2, -0.3],
+      "hodge_numbers": {"h11": 3, "h21": 19, "h22": 156},
+      "kodaira_fiber_type": "II",
+      "complex_structure_tau": [0.1, 1.5],
+      "kahler_modulus_rho": [2.0, 0.8]
+    },
+    {
+      "name": "Cooper_S22",
+      "picard_fuchs_coefficients": [-0.7, 1.1, -0.5, 0.9],
+      "hodge_numbers": {"h11": 3, "h21": 19, "h22": 156},
+      "kodaira_fiber_type": "IV*",
+      "complex_structure_tau": [-0.2, 2.0],
+      "kahler_modulus_rho": [3.0, 1.2]
+    }
+  ]
+}

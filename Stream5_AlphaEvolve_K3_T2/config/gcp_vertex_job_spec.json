@@ -1,0 +1,30 @@
+{
+  "displayName": "stream5-alphaevolve-k3-t2-poc",
+  "jobSpec": {
+    "serviceAccount": "alphaevolve-runner-sa@gen-lang-client-0625573011.iam.gserviceaccount.com",
+    "workerPoolSpecs": [
+      {
+        "machineSpec": {
+          "machineType": "n1-standard-8",
+          "acceleratorType": "NVIDIA_TESLA_V100",
+          "acceleratorCount": 2
+        },
+        "replicaCount": 1,
+        "containerSpec": {
+          "imageUri": "us-central1-docker.pkg.dev/gen-lang-client-0625573011/stream2-alphaevolve/cy4-metric-search:latest",
+          "command": ["python3", "scripts/run_stream5_poc.py"],
+          "env": [
+            {
+              "name": "STREAM",
+              "value": "STREAM_5_K3_T2"
+            },
+            {
+              "name": "GCS_DATA_LAKE_BUCKET",
+              "value": "gs://socrateai-datalake-gen-lang-client-0625573011"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

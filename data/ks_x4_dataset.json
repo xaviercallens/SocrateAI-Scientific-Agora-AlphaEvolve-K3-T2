@@ -1,0 +1,11 @@
+{
+  "dataset_name": "Kreuzer-Skarke-CY4-Sample",
+  "poly_id": "KS-X4-001",
+  "hodge_numbers": {
+    "h11": 4,
+    "h31": 22,
+    "h22": 156
+  },
+  "volume_form_target": [1.0, 1.0, 1.0, 1.0, 1.0],
+  "sample_points": 5000
+}

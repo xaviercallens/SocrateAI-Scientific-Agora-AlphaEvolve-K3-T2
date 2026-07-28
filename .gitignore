@@ -1,0 +1,21 @@
+# TPU Logs & Artifacts
+tpu_logs/
+
+# Lean 4 Build Artifacts
+.lake/
+**/.lake/
+**/build/
+
+# GCP Credentials & Service Account Keys (exclude sensitive credentials)
+*credentials*.json
+*service_account*.json
+*secret*.json
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+
+# Terraform Local State
+.terraform/
+*.tfstate
+*.tfstate.backup

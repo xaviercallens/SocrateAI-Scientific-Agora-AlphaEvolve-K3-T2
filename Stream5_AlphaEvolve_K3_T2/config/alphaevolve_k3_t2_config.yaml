@@ -1,0 +1,25 @@
+# Stream 5 AlphaEvolve K3-T2 Configuration
+project_id: "gen-lang-client-0625573011"
+gcs_data_lake: "gs://socrateai-datalake-gen-lang-client-0625573011"
+
+target_geometry:
+  manifold: "K3_T2_Fibrations"
+  hodge_numbers:
+    h11: 3
+    h21: 19
+  loss_function: "Monge_Ampere_Ricci_Flatness"
+  target_loss_threshold: 1.0e-4
+
+search_hyperparameters:
+  max_generations: 100
+  population_size: 50
+  mutation_rate: 0.15
+  activation_candidates:
+    - "sine"
+    - "gelu"
+    - "swish"
+    - "symbolic_kahler_potentials"
+
+accelerator_settings:
+  sharding_strategy: "TPU_v4_POD_MESH"
+  batch_size_per_tpu_core: 1024

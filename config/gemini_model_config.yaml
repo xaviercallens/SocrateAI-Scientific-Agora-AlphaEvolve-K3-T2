@@ -1,0 +1,36 @@
+gemini_model_config:
+  version: "1.0.0"
+  
+  tiers:
+    low:
+      model_name: "gemini-2.0-flash-lite"
+      cost_per_million_input_tokens_usd: 0.075
+      cost_per_million_output_tokens_usd: 0.30
+      rpm_limit: 1500
+      timeout_seconds: 10
+    mid:
+      model_name: "gemini-1.5-pro"
+      cost_per_million_input_tokens_usd: 3.50
+      cost_per_million_output_tokens_usd: 10.50
+      rpm_limit: 360
+      timeout_seconds: 30
+    high:
+      model_name: "gemini-1.5-ultra"
+      cost_per_million_input_tokens_usd: 7.00
+      cost_per_million_output_tokens_usd: 21.00
+      rpm_limit: 60
+      timeout_seconds: 60
+
+  escalation:
+    max_attempts: 3
+    circuit_breaker_threshold: 5
+    circuit_breaker_window_seconds: 60
+    confidence_threshold: 0.7
+
+  cost_management:
+    monthly_budget_usd: 100.0
+    alert_at_percent: 80
+    
+  routing_defaults:
+    unknown_action_tier: "mid"
+    fallback_on_error_tier: "mid"

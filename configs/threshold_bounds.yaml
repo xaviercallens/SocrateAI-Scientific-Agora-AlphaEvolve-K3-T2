@@ -1,0 +1,29 @@
+# Threshold Bounds for K3×T² Candidate Parameters
+# Enforces mathematical constraints on evolutionary search space
+
+bounds:
+  picard_fuchs:
+    order: 4
+    coefficient_min: -10.0
+    coefficient_max: 10.0
+
+  complex_structure_tau:
+    tau1_min: -0.5
+    tau1_max: 0.5
+    tau2_min: 0.01       # τ₂ > 0 (fundamental domain)
+    tau2_max: 5.0
+
+  kahler_modulus_rho:
+    rho1_min: 0.0
+    rho1_max: 10.0
+    rho2_min: 0.01
+    rho2_max: 10.0
+
+swampland_constraints:
+  distance_conjecture_bound: 1.0   # |∇V|/V ≥ c
+  ds_conjecture_lambda_min: 0.1    # min(∇²V) ≤ -c'V
+
+hodge_numbers:
+  h11: 3
+  h21: 19
+  h22: 156

@@ -1,0 +1,11 @@
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+
+# Secret key files
+*.json
+!config/gcp_vertex_job_spec.json
+
+# Local logs
+*.log
+tpu_logs/
