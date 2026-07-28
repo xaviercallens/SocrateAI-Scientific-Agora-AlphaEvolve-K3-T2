@@ -121,9 +121,20 @@ def execute_phase2():
     best_overall = None
     
     ckpt = EvolutionCheckpoint()
+    start_gen = 1
+    
+    # Check for existing checkpoint
+    latest_state = ckpt.load_latest_checkpoint()
+    if latest_state:
+        start_gen = latest_state["generation"] + 1
+        population = latest_state["population"]
+        best_overall = latest_state["best_candidate"]
+        logger.info(f"Resumed from generation {start_gen-1}. Starting at generation {start_gen}.")
+    
     start_time = time.time()
     
-    for gen in range(1, GENERATIONS + 1):
+    for gen in range(start_gen, GENERATIONS + 1):
+        time.sleep(0.5)  # Artificial delay for stress test interruption
         logger.info(f"--- Generation {gen}/{GENERATIONS} ---")
         
         # TIER 1: Mutation
@@ -156,7 +167,7 @@ def execute_phase2():
         if best_overall is None or gen_best["chi2_loss"] < best_overall["chi2_loss"]:
             best_overall = gen_best.copy()
             
-        logger.info(f"Gen {gen} Best Chi2: {gen_best['chi2_loss']:.4f} | Phenotype: w0={gen_best['phenotype']['w0']:.3f}, Om={gen_best['phenotype']['omega_m']:.3f}")
+        logger.info(f"Gen {gen} Best Chi2: {gen_best['chi2_loss']:.4f} | Phenotype: w0={gen_best['phenotype']['w0']:.3f}, Om={gen_best['phenotype']['omega_m']:.3f} | PTA Freq: {gen_best['phenotype'].get('pta_f_monopole', 0):.2e} Hz | S_8: {gen_best['phenotype'].get('s8_gradient', 0):.3f}")
         
         # Select parents for next gen
         population = evaluated_pop[:5]
